@@ -17,9 +17,10 @@ services:
             - MYSQL_USER=canal
             - MYSQL_PASSWORD=canal
             - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-            - --defaults-file=mysql5.7-1.cnf
         ports:
             - "7601:3306"
+        volumes:
+            - "./mysql-conf/mysql1:/etc/mysql/conf.d"
 
 
 
