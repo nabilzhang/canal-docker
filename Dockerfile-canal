@@ -1,0 +1,17 @@
+FROM nimmis/java-centos:oracle-7-jdk
+
+ARG VERSION
+
+RUN yum update -y && \
+    yum install -y which && \
+    yum install -y file && \ 
+    yum clean all
+
+RUN mkdir /canal
+WORKDIR /canal
+COPY docker-entrypoint.sh docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh
+COPY canal.deployer-${VERSION}.tar.gz canal.deployer-${VERSION}.tar.gz
+COPY canal-conf/instance.properties instance.properties
+
+CMD /canal/docker-entrypoint.sh

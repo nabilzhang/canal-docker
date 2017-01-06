@@ -1,0 +1,25 @@
+version: '2'
+services:
+    canal:
+        build:
+            context: .
+            args: 
+                VERSION: 1.0.23
+            dockerfile: Dockerfile-canal
+        links:
+            - mysql1
+
+    mysql1:
+        image: mysql:5.7
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-secret-pw
+            - MYSQL_DATABASE=canal
+            - MYSQL_USER=canal
+            - MYSQL_PASSWORD=canal
+            - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+            - --defaults-file=mysql5.7-1.cnf
+        ports:
+            - "7601:3306"
+
+
+
