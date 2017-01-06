@@ -5,6 +5,7 @@ ARG VERSION
 RUN yum update -y && \
     yum install -y which && \
     yum install -y file && \ 
+    yum install -y mysql && \
     yum clean all
 
 RUN mkdir /canal
@@ -15,3 +16,5 @@ COPY canal.deployer-${VERSION}.tar.gz canal.deployer-${VERSION}.tar.gz
 COPY canal-conf/instance.properties instance.properties
 
 CMD /canal/docker-entrypoint.sh
+
+EXPOSE 1099
